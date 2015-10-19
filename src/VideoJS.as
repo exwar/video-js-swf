@@ -6,15 +6,24 @@ package{
     import com.videojs.structs.ExternalErrorEventName;
     import com.videojs.Base64;
 
+    import flash.net.navigateToURL;
+    import flash.net.URLRequest;
+    import flash.net.URLVariables;
+
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
     import flash.events.TimerEvent;
+
+    import flash.events.ContextMenuEvent;
+    import flash.events.ContextMenuEvent;
+
     import flash.external.ExternalInterface;
     import flash.geom.Rectangle;
     import flash.system.Security;
+    import flash.ui.ContextMenuBuiltInItems;
     import flash.ui.ContextMenu;
     import flash.ui.ContextMenuItem;
     import flash.utils.ByteArray;
@@ -57,11 +66,17 @@ package{
 
             // add content-menu version info
 
-            var _ctxVersion:ContextMenuItem = new ContextMenuItem("VideoJS Flash Component v" + VERSION, false, false);
-            var _ctxAbout:ContextMenuItem = new ContextMenuItem("Copyright © 2014 Brightcove, Inc.", false, false);
+            function openLink():void{
+              navigateToURL(new URLRequest("https://www.tvevt.com"));
+            };
+
+            var _ctxAbout:ContextMenuItem = new ContextMenuItem("TVEVT SOCIAL TV NETWORK", false, true);
             var _ctxMenu:ContextMenu = new ContextMenu();
+
+            _ctxAbout.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, openLink);
+
             _ctxMenu.hideBuiltInItems();
-            _ctxMenu.customItems.push(_ctxVersion, _ctxAbout);
+            _ctxMenu.customItems.push(_ctxAbout);
             this.contextMenu = _ctxMenu;
 
         }
